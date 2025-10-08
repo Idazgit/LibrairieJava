@@ -1,14 +1,14 @@
 package cda.bibliotheque.dao;
 import java.util.ArrayList;
 import java.sql.Connection;
-import java.sql.Date;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-import org.w3c.dom.Element;
+
 
 import cda.bibliotheque.model.Author;
 
@@ -53,7 +53,7 @@ public class AuthorDAO{
   }
 
   public void updateAuthor(Author author){
-    String sql = "UPDATE author SET lastname = ?, firstname = ?, born_at = ?, WHERE id = ?";
+    String sql = "UPDATE author SET lastname = ?, firstname = ?, born_at = ? WHERE id = ?";
     try(PreparedStatement pstmt = connection.prepareStatement(sql
     )) {
       pstmt.setString(1, author.getLastname());
