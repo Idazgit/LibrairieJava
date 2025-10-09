@@ -37,15 +37,49 @@ public List<Book> getAllBook(){
      return books;
 }
 public void addBook(Book book){
-    String sql = "INSERT INTO author(lastname, firstname, born_at) VALUES (?,?,?)";
+    String sql = "INSERT INTO books(title, release_date, isAvailable) VALUES (?,?,?)";
     try(PreparedStatement pstmt = connection.prepareStatement(sql)) {
       pstmt.setString(1, book.getTitle());
       pstmt.setDate(2, book.getRelease_at_Date());
       pstmt.setBoolean(3, book.getIsAvailable());
+      System.out.println(pstmt);
       pstmt.executeUpdate();
-      System.out.println("Ajout de l'auteur éffectué ✅");
+      System.out.println("Ajout du livre éffectué ✅");
     } catch (SQLException e) {
      System.err.println("Erreur lors de l'ajout de addBook ❌" + e.getMessage());
+    }
+  }
+
+public void updateBook(Book book){
+  String sql = "UPDATE books SET title = ?, release_date = ?, isAvailable = ? WHERE id = ?";
+  try (PreparedStatement pstmt = connection.prepareStatement(sql)){
+    pstmt.setString(1, book.getTitle());
+    pstmt.setDate(2, book.getRelease_at_Date());
+    pstmt.setBoolean(3, book.getIsAvailable());
+    pstmt.setInt(4, book.getId());
+    int rows = pstmt.executeUpdate();
+    if (rows > 0 ) {
+      System.out.println("Livre mis à jour ✅");
+    }else {
+      System.out.println("Ce livre n'existe pas ❌");
+    }
+  } catch (SQLException e) {
+    System.out.println(book.getId());
+    System.err.println("Erreur lors de la modification dans updateBook ❌");
+  }
+}
+ public void deleteBook(int id){
+    String sql = "DELETE FROM books WHERE id = ?";
+    try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+      pstmt.setInt(1, id);
+      int rows = pstmt.executeUpdate();
+      if (rows > 0) {
+        System.out.println("Livre supprimé avec succes ✅");
+      }else{
+        System.out.println("Le livre n'existe pas ❌");
+      }
+    } catch (SQLException e) {
+      System.err.println("Erreur lors de la suppression dans deleteBook ❌ " + e.getMessage());
     }
   }
 

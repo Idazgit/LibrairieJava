@@ -14,4 +14,7 @@ public class PrimaryController {
     @FXML private void switchToBook()throws IOException{
         App.setRoot("books");
     }
+     @FXML private void switchToClient()throws IOException{
+        App.setRoot("clients");
+    }
 }

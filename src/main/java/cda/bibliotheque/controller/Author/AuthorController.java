@@ -48,7 +48,7 @@ public class AuthorController {
       colFirstName.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getFirstname()));
       colLastName.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getLastname()));
       colBornAt.setCellValueFactory(cell -> new SimpleObjectProperty<LocalDate>(cell.getValue().getBorn_at()));
-      colActions.setCellFactory(cell -> new TableCell<>(){
+      colActions.setCellFactory((var cell) -> new TableCell<>(){
         private final Button buttonEdit = new Button("Modifier");
         private final Button buttonDelete = new Button("Supprimer");
         private final HBox box = new HBox(10, buttonEdit,buttonDelete);
